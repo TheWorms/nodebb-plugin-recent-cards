@@ -1,8 +1,8 @@
 {
-	"id": "nodebb-plugin-recent-cards",
-	"name": "Recent Cards plugin for NodeBB's Persona Theme",
-	"description": "Add lavender-style cards of recent topics to Persona's category homepage",
-	"url": "https://github.com/NodeBB/nodebb-plugin-recent-cards",
+	"id": "nodebb-plugin-recent-cards-cabane-libre",
+	"name": "Recent Cards plugin for Cabane Libre Theme",
+	"description": "Cards of recent topics to Cabane Libre category homepage",
+	"url": "https://github.com/TheWorms/nodebb-plugin-recent-cards-cabane-libre",
 	"library": "./library.js",
 	"hooks": [
 		{
