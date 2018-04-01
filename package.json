@@ -33,4 +33,7 @@
   "nbbpm": {
     "compatibility": "^1.7.5"
   }
+  "peerDependencies": {
+    "nodebb-theme-cabane-libre": "^1.0.0"
+}  
 }
