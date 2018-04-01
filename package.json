@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-recent-cards-cabane-libre",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Add lavender-style cards of recent topics to Persona's category homepage",
   "main": "library.js",
   "repository": {
@@ -18,6 +18,13 @@
     "name": "psychobunny",
     "email": "psycho.bunny@hotmail.com"
   },
+  "contributors": [
+    {
+      "name": "The Worm's",
+      "email": "theworms@theworms.fr",
+      "url": "https://github.com/TheWorms"
+    }
+  ],  
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/TheWorms/nodebb-plugin-recent-cards-cabane-libre/issues"
