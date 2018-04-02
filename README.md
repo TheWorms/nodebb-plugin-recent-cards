@@ -8,3 +8,8 @@ This is an addon for the Persona theme which adds a recent cards component to th
 Install via one-click activation in the Admin Control Panel or run the following command:
 
     npm i nodebb-plugin-recent-cards-cabane-libre
+
+
+## Screenshots
+
+![preview](screenshot.png)
