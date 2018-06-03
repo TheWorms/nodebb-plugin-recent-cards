@@ -32,5 +32,5 @@
   "readmeFilename": "README.md",
   "nbbpm": {
     "compatibility": "^1.9.0"
-  },
+  } 
 }
