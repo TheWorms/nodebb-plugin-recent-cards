@@ -10,17 +10,18 @@ var socketAdmin = module.parent.require('./socket.io/admin');
 var defaultSettings = { title: 'Recent Topics', opacity: '1.0', textShadow: 'none', enableCarousel: 0, enableCarouselPagination: 0 };
 
 var plugin = module.exports;
+var app;
 
 plugin.init = function(params, callback) {
-	var app = params.router;
+	app = params.router;
 	var middleware = params.middleware;
 
 	app.get('/admin/plugins/recentcards', middleware.admin.buildHeader, renderAdmin);
 	app.get('/api/admin/plugins/recentcards', renderAdmin);
 
-	app.get('/plugins/nodebb-plugin-recent-cards-cabane-libre/render', renderExternal);
-	app.get('/plugins/nodebb-plugin-recent-cards-cabane-libre/render/style.css', renderExternalStyle);
-	app.get('/admin/plugins/nodebb-plugin-recent-cards-cabane-libre/tests/external', testRenderExternal);
+	app.get('/plugins/nodebb-plugin-recent-cards/render', renderExternal);
+	app.get('/plugins/nodebb-plugin-recent-cards/render/style.css', renderExternalStyle);
+	app.get('/admin/plugins/nodebb-plugin-recent-cards/tests/external', testRenderExternal);
 
 	plugin.settings = new settings('recentcards', '1.0.0', defaultSettings);
 
@@ -41,6 +42,35 @@ plugin.addAdminNavigation = function(header, callback) {
 	callback(null, header);
 };
 
+plugin.defineWidgets = function(widgets, callback) {
+	var widget = {
+		widget: "recentCards",
+		name: "Recent Cards",
+		description: "Recent topics carousel",
+		content: '',
+	};
+
+	widgets.push(widget);
+	callback(null, widgets);
+};
+
+plugin.renderWidget = function(widget, callback) {
+	var data = {
+		templateData: {},
+		req: {
+			uid: widget.uid,
+		},
+	};
+
+	plugin.getCategories(data, function(err, data) {
+		if (err) {
+			return callback(err);
+		}
+
+		app.render('partials/nodebb-plugin-recent-cards/header', data.templateData, callback);
+	});
+}
+
 function renderExternal(req, res, next) {
 	plugin.getCategories({
 		templateData: {}
@@ -54,18 +84,18 @@ function renderExternal(req, res, next) {
 			relative_path: nconf.get('url')
 		};
 
-		res.render('partials/nodebb-plugin-recent-cards-cabane-libre/header', data.templateData);
+		res.render('partials/nodebb-plugin-recent-cards/header', data.templateData);
 	});
 }
 
 function renderExternalStyle(req, res, next) {
-	res.render('partials/nodebb-plugin-recent-cards-cabane-libre/external/style', {
+	res.render('partials/nodebb-plugin-recent-cards/external/style', {
 		forumURL: nconf.get('url')
 	});
 }
 
 function testRenderExternal(req, res, next) {
-	res.render('admin/plugins/nodebb-plugin-recent-cards-cabane-libre/tests/external', {
+	res.render('admin/plugins/nodebb-plugin-recent-cards/tests/external', {
 		forumURL: nconf.get('url')
 	});
 }
@@ -120,15 +150,15 @@ plugin.getCategories = function(data, callback) {
 			renderCards(err, topics);
 		});
 	} else if (plugin.settings.get('popularTerm')) {
-		topics.getPopularTopics(plugin.settings.get('popularTerm'), uid, 0, 19, renderCards);
+		topics.getSortedTopics({
+			uid: uid,
+			start: 0,
+			stop: 19,
+			term: plugin.settings.get('popularTerm'),
+			sort: 'posts',
+		}, renderCards);
 	} else {
 		topics.getTopicsFromSet('topics:recent', uid, 0, 19, renderCards);
-	}
-};
-
-plugin.onNodeBBReady = function () {
-	if (nconf.get('isPrimary') === 'true') {
-		modifyCategoryTpl();
 	}
 };
 
@@ -151,35 +181,5 @@ function renderAdmin(req, res, next) {
 		});
 
 		res.render('admin/plugins/recentcards', { groups: list });
-	});
-}
-
-function modifyCategoryTpl(callback) {
-	callback = callback || function() {};
-
-	var fs = require('fs');
-	var path = require('path');
-	var tplPath = path.join(nconf.get('base_dir'), 'build/public/templates/categories.tpl');
-	var headerPath = path.join(nconf.get('base_dir'), 'node_modules/nodebb-plugin-recent-cards-cabane-libre/static/templates/partials/nodebb-plugin-recent-cards-cabane-libre/header.tpl');
-
-	async.parallel({
-		original: function(next) {
-			fs.readFile(tplPath, next);
-		},
-		header: function(next) {
-			fs.readFile(headerPath, next);
-		}
-	}, function(err, tpls) {
-		if (err) {
-			return callback(err);
-		}
-
-		var tpl = tpls.original.toString();
-
-		if (!tpl.match('<!-- Recent Cards plugin -->')) {
-			tpl = tpls.header.toString() + tpl;
-		}
-
-		fs.writeFile(tplPath, tpl, callback);
 	});
 }
