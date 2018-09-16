@@ -7,7 +7,7 @@ var topics = module.parent.require('./topics');
 var settings = module.parent.require('./settings');
 var groups = module.parent.require('./groups');
 var socketAdmin = module.parent.require('./socket.io/admin');
-var defaultSettings = { title: 'Recent Topics', opacity: '1.0', textShadow: 'none', enableCarousel: 0, enableCarouselPagination: 0 };
+var defaultSettings = { title: 'Deniers Sujets', opacity: '1.0', textShadow: 'none', enableCarousel: 0, enableCarouselPagination: 0 };
 
 var plugin = module.exports;
 var app;
@@ -36,7 +36,7 @@ plugin.addAdminNavigation = function(header, callback) {
 	header.plugins.push({
 		route: '/plugins/recentcards',
 		icon: 'fa-tint',
-		name: 'Recent Cards'
+		name: 'Derniers Sujets'
 	});
 
 	callback(null, header);
@@ -46,7 +46,7 @@ plugin.defineWidgets = function(widgets, callback) {
 	var widget = {
 		widget: "recentCards",
 		name: "Recent Cards",
-		description: "Recent topics carousel",
+		description: "Derniers sujet Carousel",
 		content: '',
 	};
 
