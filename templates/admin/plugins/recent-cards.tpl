@@ -3,7 +3,7 @@
 		<div class="form-group">
 			<label for="enableCarousel">
 				<input type="checkbox" name="enableCarousel" id="enableCarousel" />
-				Enable Carousel Mode
+				Activer le mode Carousel
 			</label>
 		</div>
 	</div>
