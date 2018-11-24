@@ -1,12 +1,12 @@
 "use strict";
 
-var nconf = module.parent.require('nconf');
-var async = module.parent.require('async');
-var validator = module.parent.require('validator');
-var topics = module.parent.require('./topics');
-var settings = module.parent.require('./settings');
-var groups = module.parent.require('./groups');
-var socketAdmin = module.parent.require('./socket.io/admin');
+var nconf = require.main.require('nconf');
+var async = require.main.require('async');
+var validator = require.main.require('validator');
+var topics = require.main.require('./src/topics');
+var settings = require.main.require('./src/settings');
+var groups = require.main.require('./src/groups');
+var socketAdmin = require.main.require('./src/socket.io/admin');
 var defaultSettings = { title: 'Deniers Sujets', opacity: '1.0', textShadow: 'none', enableCarousel: 0, enableCarouselPagination: 0 };
 
 var plugin = module.exports;
@@ -50,8 +50,14 @@ plugin.defineWidgets = function(widgets, callback) {
 		content: '',
 	};
 
-	widgets.push(widget);
-	callback(null, widgets);
+	app.render('admin/plugins/nodebb-plugin-recent-cards-cabane-libre/widget', {}, function (err, html) {
+		if (err) {
+			return callback(err);
+		}
+		widget.content = html;
+		widgets.push(widget);
+		callback(null, widgets);
+	});
 };
 
 plugin.renderWidget = function(widget, callback) {
@@ -60,6 +66,7 @@ plugin.renderWidget = function(widget, callback) {
 		req: {
 			uid: widget.uid,
 		},
+		cid: widget.data.cid || 0,		
 	};
 
 	plugin.getCategories(data, function(err, data) {
@@ -109,18 +116,23 @@ function testRenderExternal(req, res, next) {
 plugin.getCategories = function(data, callback) {
 	var uid = data.req ? data.req.uid : 0;
 
+
+	var filterCid = data.cid;
+
 	function renderCards(err, topics) {
 		if (err) {
 			return callback(err);
 		}
 
-		var i = 0, cids = [], finalTopics = [];
+		var i = 0;
+		var cids = [];
+		var finalTopics = [];
 
 		if (!plugin.settings.get('enableCarousel')) {
 			while (finalTopics.length < 4 && i < topics.topics.length) {
 				var cid = parseInt(topics.topics[i].cid, 10);
 
-				if (cids.indexOf(cid) === -1) {
+				if (filterCid || !cids.includes(cid)) {
 					cids.push(cid);
 					finalTopics.push(topics.topics[i]);
 				}
@@ -145,6 +157,9 @@ plugin.getCategories = function(data, callback) {
 
 	if (plugin.settings.get('groupName')) {
 		groups.getLatestMemberPosts(plugin.settings.get('groupName'), 19, uid, function(err, posts) {
+			if (err) {
+				return callback(err);
+			}			
 			var topics = {topics: []};
 			for (var p = 0, pp = posts.length; p < pp; p++) {
 				var topic = posts[p].topic;
@@ -153,7 +168,7 @@ plugin.getCategories = function(data, callback) {
 				topics.topics.push(topic);
 			}
 
-			renderCards(err, topics);
+			renderCards(null, topics);
 		});
 	} else if (plugin.settings.get('popularTerm')) {
 		topics.getSortedTopics({
@@ -162,9 +177,14 @@ plugin.getCategories = function(data, callback) {
 			stop: 19,
 			term: plugin.settings.get('popularTerm'),
 			sort: 'posts',
+		cids: filterCid,			
 		}, renderCards);
 	} else {
-		topics.getTopicsFromSet('topics:recent', uid, 0, 19, renderCards);
+		if (filterCid) {
+			topics.getTopicsFromSet('cid:' + filterCid + ':tids:lastposttime', uid, 0, 19, renderCards);
+		} else {
+			topics.getTopicsFromSet('topics:recent', uid, 0, 19, renderCards);
+		}
 	}
 };
 
