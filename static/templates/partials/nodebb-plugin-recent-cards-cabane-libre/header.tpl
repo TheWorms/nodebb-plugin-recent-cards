@@ -1,10 +1,6 @@
 <!-- IF topics.length -->
 <h1 class="categories-title">{recentCards.title}</h1>
 <div class="recent-cards-plugin preventSlideOut">
-	<ul class="categories">
-		<p>{recentCards.title}</p>
-	</ul>
-
 	<ul class="row recent-cards carousel-mode" itemscope itemtype="http://www.schema.org/ItemList">
 		<!-- BEGIN topics -->
 		<li class="<!-- IF topics.category.class -->{topics.category.class}<!-- ELSE -->col-md-3 col-sm-6 col-xs-12<!-- ENDIF topics.category.class --> category-item" data-cid="{topics.category.cid}" data-numRecentReplies="{topics.category.numRecentReplies}" style="text-shadow:{recentCards.textShadow};">
