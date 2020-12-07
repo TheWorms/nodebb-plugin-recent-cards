@@ -7,7 +7,7 @@ This is a plugin that creates a new widget that can be placed on various widget 
 
 Install via one-click activation in the Admin Control Panel or run the following command:
 
-    npm i nodebb-plugin-recent-cards-cabane-libre-cabane-libre
+    npm i nodebb-plugin-recent-cards-cabane-libre
     
 Then head over to Admin -> Extend -> Widgets and place the widget. Additional settings can be found at Admin -> Plugins -> Recent Cards and under the individual widget settings.
 
