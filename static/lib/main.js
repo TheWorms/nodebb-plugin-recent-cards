@@ -1,18 +1,22 @@
-"use strict";
-/*global ajaxify*/
+'use strict';
 
-$(document).ready(function(){
-	$(window).on('action:ajaxify.end', function(ev, data) {
-		if (data.tpl_url === 'categories') {
-			if (ajaxify.data.recentCards.enableCarousel) {
-				$('.recent-cards').bxSlider({
-					slideWidth: 292,
+/* global $, document, window, config */
+
+$(document).ready(function () {
+	$(window).on('action:ajaxify.end', function () {
+		var recentCards = $('.recent-cards');
+
+		if (recentCards.length) {
+			if (config.recentCards && config.recentCards.enableCarousel) {
+				recentCards.bxSlider({
+					slideWidth: 290,
 					minSlides: 1,
 					maxSlides: 4,
-					pager: ajaxify.data.recentCards.enableCarouselPagination ? true: false
+					touchEnabled: false, // breaks ajaxify on latest nodebb
+					pager: !!config.recentCards.enableCarouselPagination,
 				});
 			} else {
-				$('.recent-cards').removeClass('carousel-mode');
+				recentCards.removeClass('carousel-mode');
 			}
 		}
 	});
