@@ -147,7 +147,7 @@
 
 #nodebb-plugin-recent-cards .bx-wrapper .bx-loading {
 	min-height: 50px;
-	background: url({forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/bxslider/images/bx_loader.gif) center center no-repeat #fff;
+	background: url({forumURL}/plugins/nodebb-plugin-recent-cards/static/bxslider/images/bx_loader.gif) center center no-repeat #fff;
 	height: 100%;
 	width: 100%;
 	position: absolute;
@@ -197,13 +197,13 @@
 #nodebb-plugin-recent-cards .bx-wrapper .bx-prev {
 	left: -12px;
 	cursor: pointer;
-	background: url({forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/bxslider/images/controls.png) no-repeat 0 -32px;
+	background: url({forumURL}/plugins/nodebb-plugin-recent-cards/static/bxslider/images/controls.png) no-repeat 0 -32px;
 }
 
 #nodebb-plugin-recent-cards .bx-wrapper .bx-next {
 	right: -10px;
 	cursor: pointer;
-	background: url({forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/bxslider/images/controls.png) no-repeat -43px -32px;
+	background: url({forumURL}/plugins/nodebb-plugin-recent-cards/static/bxslider/images/controls.png) no-repeat -43px -32px;
 }
 
 #nodebb-plugin-recent-cards .bx-wrapper .bx-prev:hover {
@@ -251,7 +251,7 @@
 	width: 10px;
 	height: 11px;
 	outline: 0;
-	background: url({forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/bxslider/images/controls.png) -86px -11px no-repeat;
+	background: url({forumURL}/plugins/nodebb-plugin-recent-cards/static/bxslider/images/controls.png) -86px -11px no-repeat;
 	margin: 0 3px;
 }
 
@@ -266,7 +266,7 @@
 	width: 9px;
 	height: 11px;
 	outline: 0;
-	background: url({forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/bxslider/images/controls.png) -86px -44px no-repeat;
+	background: url({forumURL}/plugins/nodebb-plugin-recent-cards/static/bxslider/images/controls.png) -86px -44px no-repeat;
 	margin: 0 3px;
 }
 

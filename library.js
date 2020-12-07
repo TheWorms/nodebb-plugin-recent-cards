@@ -24,9 +24,9 @@ plugin.init = async function (params) {
 	router.get('/admin/plugins/recentcards', middleware.admin.buildHeader, renderAdmin);
 	router.get('/api/admin/plugins/recentcards', renderAdmin);
 
-	router.get('/plugins/nodebb-plugin-recent-cards-cabane-libre/render', renderExternal);
-	router.get('/plugins/nodebb-plugin-recent-cards-cabane-libre/render/style.css', renderExternalStyle);
-	router.get('/admin/plugins/nodebb-plugin-recent-cards-cabane-libre/tests/external', testRenderExternal);
+	router.get('/plugins/nodebb-plugin-recent-cards/render', renderExternal);
+	router.get('/plugins/nodebb-plugin-recent-cards/render/style.css', renderExternalStyle);
+	router.get('/admin/plugins/nodebb-plugin-recent-cards/tests/external', testRenderExternal);
 
 	plugin.settings = new settings('recentcards', '1.0.0', defaultSettings);
 
@@ -52,7 +52,7 @@ plugin.defineWidgets = async function (widgets) {
 		group.name = validator.escape(String(group.name));
 	});
 
-	const html = await app.renderAsync('admin/plugins/nodebb-plugin-recent-cards-cabane-libre/widget', {
+	const html = await app.renderAsync('admin/plugins/nodebb-plugin-recent-cards/widget', {
 		groups: groupsData,
 	});
 
@@ -90,7 +90,7 @@ plugin.renderWidget = async function (widget) {
 		votes: sort === 'votes',
 	};
 
-	widget.html = await app.renderAsync('partials/nodebb-plugin-recent-cards-cabane-libre/header', {
+	widget.html = await app.renderAsync('partials/nodebb-plugin-recent-cards/header', {
 		topics: topics,
 		config: widget.templateData.config,
 		title: widget.data.title || '',
@@ -206,18 +206,18 @@ function renderExternal(req, res, next) {
 			relative_path: nconf.get('url'),
 		};
 
-		res.render('partials/nodebb-plugin-recent-cards-cabane-libre/header', data.templateData);
+		res.render('partials/nodebb-plugin-recent-cards/header', data.templateData);
 	});
 }
 
 function renderExternalStyle(req, res) {
-	res.render('partials/nodebb-plugin-recent-cards-cabane-libre/external/style', {
+	res.render('partials/nodebb-plugin-recent-cards/external/style', {
 		forumURL: nconf.get('url'),
 	});
 }
 
 function testRenderExternal(req, res) {
-	res.render('admin/plugins/nodebb-plugin-recent-cards-cabane-libre/tests/external', {
+	res.render('admin/plugins/nodebb-plugin-recent-cards/tests/external', {
 		forumURL: nconf.get('url'),
 	});
 }
