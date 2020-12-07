@@ -1,11 +1,11 @@
 <label>
-	Category<br />
-	<small>Set the category IDs you want to display this widget on (separated by commas)</small>
+	Categorie<br />
+	<small>Définissez les ID de catégorie sur lesquels vous souhaitez afficher ce widget (séparés par des virgules)</small>
 </label>
 <input type="text" class="form-control" name="cid" placeholder="0" />
 
 <label>
-	Sujets de la catégorie<br />
+	Sujets de la Catégorie<br />
 	<small>Définissez les ID de catégorie à partir desquels vous souhaitez extraire les sujets (séparés par des virgules)</small>
 </label>
 <input type="text" class="form-control" name="topicsFromCid" placeholder="0" />
