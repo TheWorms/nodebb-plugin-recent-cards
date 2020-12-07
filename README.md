@@ -7,8 +7,8 @@ This is a plugin that creates a new widget that can be placed on various widget 
 
 Install via one-click activation in the Admin Control Panel or run the following command:
 
-    npm i nodebb-plugin-recent-cards
-
+    npm i nodebb-plugin-recent-cards-cabane-libre-cabane-libre
+    
 Then head over to Admin -> Extend -> Widgets and place the widget. Additional settings can be found at Admin -> Plugins -> Recent Cards and under the individual widget settings.
 
 ## Screenshot
@@ -24,13 +24,13 @@ Use this plugin on any external non-nodebb site (ex. Wordpress, etc) to show rec
 Place these in the `header` section of your external site, and replace all instances of `{forumURL}` to your forum's URL:
 
 ```
-<script src="{forumURL}/plugins/nodebb-plugin-recent-cards/static/bxslider/jquery.bxslider.min.js"></script>
+<script src="{forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/bxslider/jquery.bxslider.min.js"></script>
 <script>
 window.path_to_nodebb = '{forumURL}';
 </script>
-<script src="{forumURL}/plugins/nodebb-plugin-recent-cards/static/lib/external.js"></script>
-<link rel="stylesheet" type="text/css" href="{forumURL}/plugins/nodebb-plugin-recent-cards/render/style.css" />
-<link rel="stylesheet" type="text/css" href="{forumURL}/plugins/nodebb-plugin-recent-cards/static/bxslider/jquery.bxslider.css" />
+<script src="{forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/lib/external.js"></script>
+<link rel="stylesheet" type="text/css" href="{forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/render/style.css" />
+<link rel="stylesheet" type="text/css" href="{forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/bxslider/jquery.bxslider.css" />
 ```
 
 If your external site doesn't have jQuery included, you will have include it above the previous lines. Get the latest jQuery at https://code.jquery.com/
@@ -44,7 +44,7 @@ You should also (optionally) require the jQuery Timeago library in order to disp
 If your external site doesn't have Bootstrap included, you will have to include this line as well in your `header`, which is the bare minimum (grid + responsive utilities) required for this plugin:
 
 ```
-<link rel="stylesheet" type="text/css" href="{forumURL}/plugins/nodebb-plugin-recent-cards/static/external/bootstrap-grid.css" />
+<link rel="stylesheet" type="text/css" href="{forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/external/bootstrap-grid.css" />
 ```
 
 Similarly, if your external site does not use FontAwesome, then you will have to include this line as well in order to display category icons:
@@ -66,7 +66,7 @@ Finally, if you need to include the default Persona font to match your external 
 Place the following code wherever you'd like recent cards to be displayed:
 
 ```
-<div id="nodebb-plugin-recent-cards"></div>
+<div id="nodebb-plugin-recent-cards-cabane-libre"></div>
 ```
 
 ### Configure ACAO in NodeBB
@@ -75,4 +75,4 @@ Under Settings -> Advanced in the NodeBB control panel, add the external site's 
 
 ### Stuck?
 
-No problem! Visit https://yourforum.com/admin/plugins/nodebb-plugin-recent-cards/tests/external, which will render the standalone version of the plugin tailored for your website. Keep in mind that this includes all extra scripts and styling that you may not necessarily need if you already have Bootstrap, jQuery, etc. on your external site.
+No problem! Visit https://yourforum.com/admin/plugins/nodebb-plugin-recent-cards-cabane-libre/tests/external, which will render the standalone version of the plugin tailored for your website. Keep in mind that this includes all extra scripts and styling that you may not necessarily need if you already have Bootstrap, jQuery, etc. on your external site.
