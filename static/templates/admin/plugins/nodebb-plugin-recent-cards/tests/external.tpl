@@ -5,7 +5,7 @@
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
 
-		<script src="{forumURL}/plugins/nodebb-plugin-recent-cards-cabane-libre/static/bxslider/jquery.bxslider.min.js"></script>
+		<script src="{forumURL}/plugins/nodebb-plugin-recent-cards/static/bxslider/jquery.bxslider.min.js"></script>
 		<script>
 		window.path_to_nodebb = '{forumURL}';
 		</script>
