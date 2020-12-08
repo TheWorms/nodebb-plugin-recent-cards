@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-lg-9">
 		<div class="panel panel-default">
-			<div class="panel-heading">Recent Cards</div>
+			<div class="panel-heading">Derniers Sujets</div>
 			<div class="panel-body">
 				<form role="form" id="recentcards">
 					<div class="form-group">
